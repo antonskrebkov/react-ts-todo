@@ -1,20 +1,12 @@
 import React, {createContext} from "react";
-
-interface Itodo {
-  id: number,
-  chapter: string,
-  title: string,
-  completed: boolean,
-  priorityCode: number,
-  cachedPriorityCode: number
-}
+import { ITodo } from "../interfaces/ITodo";
 
 export type DeletedListContextType = {
-  deletedTodos: Itodo[];
-  setDeletedTodos: (deletedTodos: Itodo[]) => void;
+  deletedTodos: ITodo[];
+  setDeletedTodos: (deletedTodos: ITodo[]) => void;
 }
 
 export const DeletedContext = createContext<DeletedListContextType>({
   deletedTodos: [],
-  setDeletedTodos: (deletedTodos) => {}
+  setDeletedTodos: (deletedTodos: ITodo[]) => {}
 })

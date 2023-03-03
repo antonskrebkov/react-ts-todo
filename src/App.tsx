@@ -6,19 +6,11 @@ import Layout from './components/Layout/Layout';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { DeletedContext } from './context/DeletedListContext';
 import { AuthContext } from './context/AuthContext';
-
-interface Itodo {
-  id: number,
-  chapter: string,
-  title: string,
-  completed: boolean,
-  priorityCode: number,
-  cachedPriorityCode: number
-}
+import { ITodo } from "./interfaces/ITodo";
 
 export default function App() {
 
-  const [deletedTodos, setDeletedTodos] = useState<Itodo[]>([]);
+  const [deletedTodos, setDeletedTodos] = useState<ITodo[]>([]);
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   useEffect(() => {

@@ -1,19 +1,14 @@
 import React, { useContext, useState } from 'react'
-import logo from './img/logo.png'
-import './NavBar.css'
+import logo from '../../assets/images/logo.png'
+import './Navbar.css'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import { AuthContext, AuthContextType } from '../../context/AuthContext';
-
-
-interface Ilink {
-  name: string,
-  to: string
-}
+import { ILink } from '../../interfaces/ILink';
 
 export default function NavBar() {
 
-  const routes: Ilink[] = [
+  const routes: ILink[] = [
     { name: "Main Tasks", to: "/" },
     { name: "Deleted Tasks", to: "/deleted" },
   ];
@@ -39,7 +34,7 @@ export default function NavBar() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
-            {routes.map((link: Ilink) => {
+            {routes.map((link: ILink) => {
                 return(
                   <NavLink
                     key={link.name}

@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
 import { Button, ListGroup } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import trash from '../trash.svg';
+import trash from '../assets/images/trash.svg';
 
 export default function DeletedTasks() {
   const {deletedTodos, setDeletedTodos} = useContext(DeletedContext) as DeletedListContextType;

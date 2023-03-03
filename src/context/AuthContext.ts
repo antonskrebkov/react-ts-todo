@@ -5,7 +5,6 @@ export type AuthContextType = {
   setIsAuth: (isAuth: boolean) => void
 }
 
-
 export const AuthContext = createContext<AuthContextType>({
   isAuth: false,
   setIsAuth: (isAuth) => {}

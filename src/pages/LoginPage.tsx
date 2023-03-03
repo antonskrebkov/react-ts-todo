@@ -1,12 +1,8 @@
 import React, {useState, useContext, useEffect} from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
 import { AuthContext, AuthContextType } from '../context/AuthContext';
-import '../App.css';
-
-interface IAuth {
-  username: string,
-  password: string
-}
+import '../assets/App.css';
+import { IAuth } from '../interfaces/IAuth';
 
 export default function LoginPage() {
 
