@@ -7,7 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
 import { ITodo } from '../interfaces/ITodo';
 import CreateTodo from '../components/CreateTodo';
-import { sortedTodos } from '../helpers';
+import { sortTodos, toggleHandler, deleteHandler} from '../helpers';
 
 function MainPage() {
 
@@ -17,69 +17,11 @@ function MainPage() {
 
   const {deletedTodos, setDeletedTodos} = useContext(DeletedContext) as DeletedListContextType;
 
-  function deleteTodo(id: number, chapter: string, e: any) {
-    e.stopPropagation();
-    switch (chapter) {
-      case 'Productivity' : 
-          setProductivityTodos(productivityTodos.filter((todo) => todo.id !== id));
-          setDeletedTodos([...deletedTodos, ...productivityTodos.filter((todo) => todo.id === id)])
-        break;
-        case 'Assignments' : 
-          setAssignmentTodos(assignmentTodos.filter((todo) => todo.id !== id))
-          setDeletedTodos([...deletedTodos, ...assignmentTodos.filter((todo) => todo.id === id)])
-        break;
-        case 'Work' :
-          setWorkTodos(workTodos.filter((todo) => todo.id !== id))
-          setDeletedTodos([...deletedTodos, ...workTodos.filter((todo) => todo.id === id)])
-        break;
-    }
-  }
+  const sortedProductivityTodos = sortTodos(productivityTodos)
+  const sortedAssignmentTodos = sortTodos(assignmentTodos)
+  const sortedWorkTodos = sortTodos(workTodos)
 
-  const sortedProductivityTodos = sortedTodos(productivityTodos)
-  const sortedAssignmentTodos = sortedTodos(assignmentTodos)
-  const sortedWorkTodos = sortedTodos(workTodos)
-
-  function toggleTodo(id: number, chapter: string) {
-    switch (chapter) {
-      case 'Productivity' : 
-      setProductivityTodos(sortedProductivityTodos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-          todo.completed ? todo.priorityCode = 0 : todo.priorityCode = todo.cachedPriorityCode
-        }
-        return todo
-      }))
-        break;
-      case 'Assignments' : 
-      setAssignmentTodos(sortedAssignmentTodos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-          todo.completed ? todo.priorityCode = 0 : todo.priorityCode = todo.cachedPriorityCode
-        }
-        return todo
-      }))
-        break;
-      case 'Work' :
-        setWorkTodos(sortedWorkTodos.map(todo => {
-          if (todo.id === id) {
-            todo.completed = !todo.completed
-            todo.completed ? todo.priorityCode = 0 : todo.priorityCode = todo.cachedPriorityCode
-          }
-          return todo
-        }))
-        break;
-    }
-  } 
-
-  function setColorFromPriority(priorityCode: any) {
-    switch (priorityCode) {
-      case 1 || '1' : return 'success';
-      case 2 || '2' : return 'warning';
-      case 3 || '3' : return 'danger';
-    }
-  }
-
-  function createTodo(newTodo: ITodo) {
+  function createTodo(newTodo: ITodo): void {
     switch (newTodo.chapter) {
       case 'Productivity' : 
         setProductivityTodos([...productivityTodos, newTodo]);
@@ -90,6 +32,44 @@ function MainPage() {
       case 'Work' :
         setWorkTodos([...workTodos, newTodo]);
         break;
+    }
+  }
+
+  function toggleTodo(id: number, chapter: string): void {
+    switch (chapter) {
+      case 'Productivity' : 
+        toggleHandler(setProductivityTodos, sortedProductivityTodos, id)
+        break;
+      case 'Assignments' : 
+        toggleHandler(setAssignmentTodos, sortedAssignmentTodos, id)
+        break;
+      case 'Work' :
+        toggleHandler(setWorkTodos, sortedWorkTodos, id)
+        break;
+    }
+  } 
+
+  function deleteTodo(id: number, chapter: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    event.stopPropagation();
+    switch (chapter) {
+      case 'Productivity' : 
+          deleteHandler(setProductivityTodos, productivityTodos, setDeletedTodos, deletedTodos, id)
+          break;
+      case 'Assignments' : 
+        deleteHandler(setAssignmentTodos, assignmentTodos, setDeletedTodos, deletedTodos, id)
+        break;
+      case 'Work' :
+        deleteHandler(setWorkTodos, workTodos, setDeletedTodos, deletedTodos, id)
+        break;
+    }
+  }
+
+  function setColorFromPriority(priorityCode: any): string {
+    switch (priorityCode) {
+      case 1 || '1' : return 'success';
+      case 2 || '2' : return 'warning';
+      case 3 || '3' : return 'danger';
+      default : return 'success'
     }
   }
 
