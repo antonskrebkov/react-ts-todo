@@ -2,14 +2,15 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import trash from '../assets/images/trash.svg';
 import '../assets/App.css'
-import { Badge, Button, Accordion, ListGroup, Form, Modal } from 'react-bootstrap';
+import { Badge, Button, Accordion, ListGroup, Form } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
 import { ITodo } from '../interfaces/ITodo';
 import CreateTodo from '../components/CreateTodo';
-
+import { sortedTodos } from '../helpers';
 
 function MainPage() {
+
   const [productivityTodos, setProductivityTodos] = useState<ITodo[]>([]);
   const [assignmentTodos, setAssignmentTodos] = useState<ITodo[]>([]);
   const [workTodos, setWorkTodos] = useState<ITodo[]>([]);
@@ -34,9 +35,9 @@ function MainPage() {
     }
   }
 
-  const sortedProductivityTodos: ITodo[] = [...productivityTodos].sort((todo, prevTodo) => prevTodo.priorityCode - todo.priorityCode)
-  const sortedAssignmentTodos: ITodo[] = [...assignmentTodos].sort((todo, prevTodo) => prevTodo.priorityCode - todo.priorityCode)
-  const sortedWorkTodos: ITodo[] = [...workTodos].sort((todo, prevTodo) => prevTodo.priorityCode - todo.priorityCode)
+  const sortedProductivityTodos = sortedTodos(productivityTodos)
+  const sortedAssignmentTodos = sortedTodos(assignmentTodos)
+  const sortedWorkTodos = sortedTodos(workTodos)
 
   function toggleTodo(id: number, chapter: string) {
     switch (chapter) {
