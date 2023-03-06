@@ -9,7 +9,7 @@ import { ITodo } from '../interfaces/ITodo';
 import CreateTodo from '../components/CreateTodo';
 import { sortTodos, toggleHandler, deleteHandler} from '../helpers';
 
-function MainPage() {
+export default function MainPage() {
 
   const [productivityTodos, setProductivityTodos] = useState<ITodo[]>([]);
   const [assignmentTodos, setAssignmentTodos] = useState<ITodo[]>([]);
@@ -116,16 +116,25 @@ function MainPage() {
                       timeout={200}
                       classNames="todo"
                     >
-                      <ListGroup.Item style={!todo.completed ? {cursor: 'pointer'} : {cursor: 'default'}} onClick={() => toggleTodo(todo.id, todo.chapter)} key={todo.id} className="listGroupItem rounded mt-1 border-0" variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}>
-                        <div className='listGroupItemLeft'>
-                          <Form.Check style={{display: 'none'}} type='checkbox'/>
-                          <div style={todo.completed ? {textDecoration: 'line-through'} : {textDecoration: 'none'}} className="todoTitle">{todo.title}</div>
+                      <ListGroup.Item 
+                        onClick={() => toggleTodo(todo.id, todo.chapter)} 
+                        key={todo.id} 
+                        className="todo-item d-flex justify-content-between align-items-center rounded mt-1 border-0" 
+                        variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}
+                      >
+                        <Form.Check className="d-none" type='checkbox'/>
+                        <div 
+                          className={todo.completed ? "text-decoration-line-through" : "text-decoration-none"}
+                        >
+                          {todo.title}
                         </div>
-                        <div className='todo-item-right'>
-                          <Button className="remove-todo" variant='none' onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}>
-                            <img src={trash} alt="" />
-                          </Button>
-                        </div>
+                        <Button 
+                          className="remove-todo" 
+                          variant='none' 
+                          onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}
+                        >
+                          <img src={trash} alt="" />
+                        </Button>
                       </ListGroup.Item>
                     </CSSTransition>
                   )
@@ -150,16 +159,26 @@ function MainPage() {
                     timeout={200}
                     classNames="todo"
                   >
-                    <ListGroup.Item style={!todo.completed ? {cursor: 'pointer'} : {cursor: 'default'}} onClick={() => toggleTodo(todo.id, todo.chapter)} key={todo.id} className="listGroupItem rounded mt-1 border-0" variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}>
-                      <div className='listGroupItemLeft'>
-                        <Form.Check style={{display: 'none'}} type='checkbox'/>
-                        <div style={todo.completed ? {textDecoration: 'line-through'} : {textDecoration: 'none'}} className="todoTitle">{todo.title}</div>
+                    <ListGroup.Item 
+                      style={!todo.completed ? {cursor: 'pointer'} : {cursor: 'default'}} 
+                      onClick={() => toggleTodo(todo.id, todo.chapter)} 
+                      key={todo.id} 
+                      className="d-flex justify-content-between align-items-center rounded mt-1 border-0" 
+                      variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}
+                    >
+                      <Form.Check style={{display: 'none'}} type='checkbox'/>
+                      <div 
+                        style={todo.completed ? {textDecoration: 'line-through'} : {textDecoration: 'none'}} 
+                      >
+                        {todo.title}
                       </div>
-                      <div className='todo-item-right'>
-                        <Button className="remove-todo" variant='none' onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}>
-                          <img src={trash} alt="" />
-                        </Button>
-                      </div>
+                      <Button 
+                        className="remove-todo" 
+                        variant='none' 
+                        onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}
+                      >
+                        <img src={trash} alt="" />
+                      </Button>
                     </ListGroup.Item>
                   </CSSTransition>
                   )})}
@@ -183,16 +202,26 @@ function MainPage() {
                     timeout={200}
                     classNames="todo"
                   >
-                    <ListGroup.Item style={!todo.completed ? {cursor: 'pointer' } : {cursor: 'default'}} onClick={() => toggleTodo(todo.id, todo.chapter)} key={todo.id} className="listGroupItem rounded mt-1 border-0" variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}>
-                      <div className='listGroupItemLeft'>
-                        <Form.Check style={{display: 'none'}} type='checkbox'/>
-                        <div style={todo.completed ? {textDecoration: 'line-through'} : {textDecoration: 'none'}} className="todoTitle">{todo.title}</div>
+                    <ListGroup.Item 
+                      style={!todo.completed ? {cursor: 'pointer' } : {cursor: 'default'}} 
+                      onClick={() => toggleTodo(todo.id, todo.chapter)} 
+                      key={todo.id} 
+                      className="d-flex justify-content-between align-items-center rounded mt-1 border-0" 
+                      variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}
+                    >
+                      <Form.Check style={{display: 'none'}} type='checkbox'/>
+                      <div 
+                        style={todo.completed ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}
+                      >
+                        {todo.title}
                       </div>
-                      <div className='todo-item-right'>
-                        <Button variant='none' className="remove-todo" onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}>
-                          <img src={trash} alt="" />
-                        </Button>
-                      </div>
+                      <Button 
+                        variant='none' 
+                        className="remove-todo" 
+                        onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}
+                      >
+                        <img src={trash} alt="" />
+                      </Button>
                     </ListGroup.Item>
                   </CSSTransition>
                   )})}
@@ -204,5 +233,3 @@ function MainPage() {
     </div>
   );
 }
-
-export default MainPage;

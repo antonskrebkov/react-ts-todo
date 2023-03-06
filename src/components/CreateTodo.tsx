@@ -72,7 +72,7 @@ export default function CreateTodo({create}: CreateTodoProps) {
               onChange={(e) => setTodoTitle(e.target.value)}
               onKeyDown={(e) => e.code === 'Enter' ? addNewTodo() : ''}
             />
-            {showError && <div className="form-validation">Title is required and must be longer than 2 letters!</div>}
+            {showError && <div className="text-danger mt-1 fs-6">Title is required and must be longer than 2 letters!</div>}
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>

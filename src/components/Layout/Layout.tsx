@@ -14,8 +14,8 @@ export default function Layout() {
           <Outlet />
         </Container>
       </main>
-      <footer className='footer bg-dark'>
-        <Container className=''>
+      <footer className='footer bg-dark pt-4 pb-1 text-light text-center border-top border-2 border-secondary'>
+        <Container>
           <p>Anton Skrebkov - 2023</p>
         </Container>
       </footer>

@@ -13,7 +13,7 @@ export default function DeletedTasks() {
   }
 
   function cleanDeleted() {
-    let confirmation: boolean = window.confirm('Are you sure you want to clear the list?')
+    let confirmation: boolean = window.confirm('Are you sure you want to clear the entire list?')
     
     if (confirmation === true) {
       setDeletedTodos([])
@@ -41,10 +41,8 @@ export default function DeletedTasks() {
                 timeout={200}
                 classNames="todo"
               >
-                <ListGroup.Item key={todo.id} className="listGroupItem rounded mb-2" variant='secondary'>
-                  <div className='listGroupItemLeft'>
-                    <div className="todoTitle">{todo.chapter}: {todo.title}</div>
-                  </div>
+                <ListGroup.Item key={todo.id} className="d-flex justify-content-between align-items-center rounded mb-2" variant='secondary'>
+                  <div className="todoTitle">{todo.chapter}: {todo.title}</div>
                   <div className='todo-item-right'>
                     <Button className="remove-todo" variant='none' onClick={(e) => deleteTodo(todo.id, e)}>
                       <img src={trash} alt="" />

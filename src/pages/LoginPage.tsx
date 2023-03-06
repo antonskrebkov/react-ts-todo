@@ -28,13 +28,13 @@ export default function LoginPage() {
   
   return (
     <div>
-      <Form onSubmit={login} className="login-form bg-dark">
+      <Form onSubmit={login} className="d-flex vw-100 vh-100 justify-content-center align-items-center bg-dark">
         <Container className='login-form-container'>
         <h1 className='text-light text-center mb-3'>Welcome to todo app!</h1>
           <Form.Group className="mb-3 text-light" controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
             <Form.Control 
-              type="text" 
+              type="text"
               placeholder="Enter username" 
               value={authData.username} 
               onChange={(e) => setAuthData({...authData, username: e.target.value})}/>
@@ -48,7 +48,7 @@ export default function LoginPage() {
               value={authData.password} 
               onChange={(e) => setAuthData({...authData, password: e.target.value})} />
           </Form.Group>
-          {error && <div className="form-validation">Incorrect username or password</div>}
+          {error && <div className="text-danger mt-1 fs-6">Incorrect username or password</div>}
           <Button className='mt-3' variant="light" type="submit">
             Submit
           </Button>
