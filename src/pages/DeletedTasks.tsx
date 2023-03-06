@@ -1,8 +1,9 @@
-import React, {useContext, useEffect} from 'react'
+import {useContext} from 'react'
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
 import { Button, ListGroup } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import trash from '../assets/images/trash.svg';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function DeletedTasks() {
   const {deletedTodos, setDeletedTodos} = useContext(DeletedContext) as DeletedListContextType;
@@ -20,13 +21,7 @@ export default function DeletedTasks() {
     }
   }
 
-  useEffect(() => {
-    setDeletedTodos(JSON.parse(localStorage.getItem('deleted')!))
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('deleted', JSON.stringify(deletedTodos));
-  }, [deletedTodos])
+  useLocalStorage('deleted', deletedTodos, setDeletedTodos)
 
   return (
     <div className="mt-4">

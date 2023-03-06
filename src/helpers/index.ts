@@ -1,6 +1,4 @@
-import React, {Dispatch, SetStateAction} from "react"
 import { ITodo } from "../interfaces/ITodo"
-
 
 export const sortTodos = (todosArray: ITodo[]): ITodo[] => {
   return [...todosArray].sort((todo, prevTodo) => prevTodo.priorityCode - todo.priorityCode)

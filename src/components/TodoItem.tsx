@@ -1,22 +1,33 @@
-import React from 'react'
+import React from 'react';
 import { Button, ListGroup, Form } from 'react-bootstrap';
 import trash from '../assets/images/trash.svg';
-import { CSSTransition } from 'react-transition-group';
 import { ITodo } from '../interfaces/ITodo';
 
 interface TodoItemProps {
-  todo: ITodo
+  todo: ITodo,
+  toggle: (currentTodo: ITodo) => void,
+  remove: (currentTodo: ITodo) => void,
 }
 
-export default function TodoItem( {todo}: TodoItemProps) {
+export default function TodoItem( {todo, toggle, remove} : TodoItemProps) {
+
+  function removeHandler(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.stopPropagation();
+    remove(todo);
+  }
+
+  function setColorFromPriority(priorityCode: any): string {
+    switch (priorityCode) {
+      case 1 || '1' : return 'success';
+      case 2 || '2' : return 'warning';
+      case 3 || '3' : return 'danger';
+      default : return 'success'
+    }
+  }
+  
   return (
-    <CSSTransition
-      key={todo.id}
-      timeout={200}
-      classNames="todo"
-    >
-      {/* <ListGroup.Item 
-        onClick={() => toggleTodo(todo.id, todo.chapter)} 
+      <ListGroup.Item 
+        onClick={() => toggle(todo)} 
         key={todo.id} 
         className="todo-item d-flex justify-content-between align-items-center rounded mt-1 border-0" 
         variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}
@@ -30,11 +41,10 @@ export default function TodoItem( {todo}: TodoItemProps) {
         <Button 
           className="remove-todo" 
           variant='none' 
-          onClick={(e) => deleteTodo(todo.id, todo.chapter, e)}
+          onClick={(e) => removeHandler(e)}
         >
           <img src={trash} alt="" />
         </Button>
-      </ListGroup.Item> */}
-    </CSSTransition>
+      </ListGroup.Item>
   )
 }
