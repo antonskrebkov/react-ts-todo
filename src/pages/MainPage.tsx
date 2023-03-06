@@ -1,20 +1,22 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import trash from '../assets/images/trash.svg';
 import '../assets/App.css'
 import { Badge, Button, Accordion, ListGroup, Form } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
+import { ProductivityTodosContext, ProductivityTodosContextType } from '../context/ProductivityTodosContext';
+import { AssignmentTodosContext, AssignmentTodosContextType } from '../context/AssignmentTodosContext';
+import { WorkTodosContext, WorkTodosContextType } from '../context/WorkTodosContext';
 import { ITodo } from '../interfaces/ITodo';
 import CreateTodo from '../components/CreateTodo';
+// import TodoItem from '../components/TodoItem';
 import { sortTodos, toggleHandler, deleteHandler} from '../helpers';
 
 export default function MainPage() {
 
-  const [productivityTodos, setProductivityTodos] = useState<ITodo[]>([]);
-  const [assignmentTodos, setAssignmentTodos] = useState<ITodo[]>([]);
-  const [workTodos, setWorkTodos] = useState<ITodo[]>([]);
-
+  const {productivityTodos, setProductivityTodos} = useContext(ProductivityTodosContext) as ProductivityTodosContextType;
+  const {assignmentTodos, setAssignmentTodos} = useContext(AssignmentTodosContext) as AssignmentTodosContextType;
+  const {workTodos, setWorkTodos} = useContext(WorkTodosContext) as WorkTodosContextType;
   const {deletedTodos, setDeletedTodos} = useContext(DeletedContext) as DeletedListContextType;
 
   const sortedProductivityTodos = sortTodos(productivityTodos)
