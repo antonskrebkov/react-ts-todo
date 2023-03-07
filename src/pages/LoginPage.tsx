@@ -10,13 +10,12 @@ export default function LoginPage() {
   const [authData, setAuthData] = useState<IAuth>({
     username: '',
     password: ''
-  }) 
-  
-  
+  })
+
   const {isAuth, setIsAuth} = useContext(AuthContext) as AuthContextType;
   
-  const login = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const login = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     if(authData.username === 'admin' && authData.password === '1234') {
       setError(false)
       setIsAuth(true)
@@ -39,7 +38,6 @@ export default function LoginPage() {
               value={authData.username} 
               onChange={(e) => setAuthData({...authData, username: e.target.value})}/>
           </Form.Group>
-
           <Form.Group className="text-light" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control 

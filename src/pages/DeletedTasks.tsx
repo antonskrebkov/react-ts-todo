@@ -6,10 +6,11 @@ import trash from '../assets/images/trash.svg';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function DeletedTasks() {
+
   const {deletedTodos, setDeletedTodos} = useContext(DeletedContext) as DeletedListContextType;
 
-  function deleteTodo(id: number, e: any) {
-    e.stopPropagation();
+  function deleteTodo(id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.stopPropagation();
     setDeletedTodos(deletedTodos.filter((todo) => todo.id !== id))
   }
 

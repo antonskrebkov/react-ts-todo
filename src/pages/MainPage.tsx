@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import '../assets/App.css'
 import { Accordion } from 'react-bootstrap';
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
