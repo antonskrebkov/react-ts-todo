@@ -19,7 +19,7 @@ export default function TodoList({ eventKey, todoList, setTodos, deletedTodos, s
 
   function toggleTodo(currentTodo: ITodo): void {
     toggleHandler(setTodos, sortedTodoList, currentTodo.id)
-  } 
+  }
 
   function deleteTodo(currentTodo: ITodo): void {
     deleteHandler(setTodos, todoList, setDeletedTodos, deletedTodos, currentTodo.id)

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import DeletedTasks from './pages/DeletedTasks';
+import TodoPage from './pages/TodoPage';
 import Layout from './components/Layout/Layout';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { DeletedContext } from './context/DeletedListContext';
@@ -50,18 +51,23 @@ export default function App() {
               {isAuth ?
                 <Routes>
                   <Route path="/" element={<Layout />}>
-                    <Route index element={<MainPage />}></Route>
+                    <Route path="todos" element={<MainPage />}></Route>
                     <Route path="deleted" element={<DeletedTasks />}></Route>
+                    <Route path="todos/:id" element={<TodoPage />}></Route>
                   </Route>
-                  <Route path="*" element={<Navigate to="/" replace />}></Route>
+                  <Route 
+                    path="*" 
+                    element={<Navigate to="/todos" replace />}>
+                  </Route>
                 </Routes>
               :
               <Routes>
                   <Route path="/login" element={<LoginPage />}></Route>
                   <Route 
                     path="*"
-                    element={<Navigate to="/login" replace />}></Route>
-                </Routes>
+                    element={<Navigate to="/login" replace />}>
+                  </Route>
+              </Routes>
               }
               </BrowserRouter>
             </DeletedContext.Provider>

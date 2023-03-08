@@ -9,7 +9,7 @@ import { ILink } from '../../interfaces/ILink';
 export default function NavBar() {
 
   const routes: ILink[] = [
-    { name: "Main Tasks", to: "/" },
+    { name: "Main Tasks", to: "/todos" },
     { name: "Deleted Tasks", to: "/deleted" },
   ];
 
@@ -26,7 +26,7 @@ export default function NavBar() {
       <Navbar.Brand className="brand p-0 m-0" href="#home">
           <NavLink
             key="Main Page"
-            to="/"
+            to="/todos"
           >
             <img src={logo} className="logo h-75 w-75" alt="" />
         </NavLink>

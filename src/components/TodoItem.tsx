@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, ListGroup, Form } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import trash from '../assets/images/trash.svg';
 import { ITodo } from '../interfaces/ITodo';
 
@@ -16,11 +17,11 @@ export default function TodoItem( {todo, toggle, remove} : TodoItemProps) {
     remove(todo);
   }
 
-  function setColorFromPriority(priorityCode: any): string {
+  function setColorFromPriority(priorityCode: number): string {
     switch (priorityCode) {
-      case 1 || '1' : return 'success';
-      case 2 || '2' : return 'warning';
-      case 3 || '3' : return 'danger';
+      case 1 : return 'success';
+      case 2 : return 'warning';
+      case 3 : return 'danger';
       default : return 'success'
     }
   }
@@ -38,13 +39,21 @@ export default function TodoItem( {todo, toggle, remove} : TodoItemProps) {
         >
           {todo.title}
         </div>
-        <Button 
-          className="remove-todo" 
-          variant='none' 
-          onClick={(e) => removeHandler(e)}
-        >
-          <img src={trash} alt="" />
-        </Button>
+        <div className="d-flex justify-content-center align-items-center gap-1">
+          <Link 
+            to={`/todos/${todo.id}`}
+            className="open-todo text-decoration-none text-secondary d-flex px-1 justify-content-center align-items-center border border-1 rounded border-secondary"
+          >
+            Open
+          </Link>
+          <Button 
+            className="remove-todo" 
+            variant='none' 
+            onClick={(e) => removeHandler(e)}
+          >
+            <img src={trash} alt="" />
+          </Button>
+        </div>
       </ListGroup.Item>
   )
 }

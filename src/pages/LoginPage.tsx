@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
 import { AuthContext, AuthContextType } from '../context/AuthContext';
 import '../assets/App.css';
@@ -19,7 +19,7 @@ export default function LoginPage() {
     if(authData.username === 'admin' && authData.password === '1234') {
       setError(false)
       setIsAuth(true)
-      localStorage.setItem('isAuth' , 'true')
+      localStorage.setItem('isAuth', 'true')
     } else {
       setError(true)
     }

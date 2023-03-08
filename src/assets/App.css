@@ -13,6 +13,13 @@
 .todo-item:hover {
   box-shadow: inset 0px 0px 0px 100px rgba(0,0,0, 0.15);
 }
+.open-todo {
+  height: 30px;
+  transition: 0.2s all;
+}
+.open-todo:hover {
+  background-color: rgba(0,0,0, 0.15);
+}
 .remove-todo {
   padding: 2px;
 }
