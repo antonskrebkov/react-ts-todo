@@ -1,4 +1,4 @@
-export interface ILink {
+export default interface ILink {
   name: string,
   to: string
 }

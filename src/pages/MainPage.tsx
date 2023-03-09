@@ -5,7 +5,7 @@ import { DeletedContext, DeletedListContextType } from '../context/DeletedListCo
 import { ProductivityTodosContext, ProductivityTodosContextType } from '../context/ProductivityTodosContext';
 import { AssignmentTodosContext, AssignmentTodosContextType } from '../context/AssignmentTodosContext';
 import { WorkTodosContext, WorkTodosContextType } from '../context/WorkTodosContext';
-import { ITodo } from '../interfaces/ITodo';
+import ITodo from '../interfaces/ITodo';
 import CreateTodo from '../components/CreateTodo';
 import TodoList from '../components/TodoList';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -39,7 +39,7 @@ export default function MainPage() {
   return (
     <div className="App mt-4">
       <CreateTodo create={createTodo}></CreateTodo>
-      <Accordion className='mt-4' alwaysOpen>
+      <Accordion className="mt-4" alwaysOpen>
           <TodoList 
             eventKey="0"
             todoList={productivityTodos}

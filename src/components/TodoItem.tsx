@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, ListGroup, Form } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import trash from '../assets/images/trash.svg';
-import { ITodo } from '../interfaces/ITodo';
+import ITodo from '../interfaces/ITodo';
 
 interface TodoItemProps {
   todo: ITodo,
@@ -11,7 +11,6 @@ interface TodoItemProps {
 }
 
 export default function TodoItem( {todo, toggle, remove} : TodoItemProps) {
-
   function removeHandler(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.stopPropagation();
     remove(todo);
@@ -31,9 +30,9 @@ export default function TodoItem( {todo, toggle, remove} : TodoItemProps) {
         onClick={() => toggle(todo)} 
         key={todo.id} 
         className="todo-item d-flex justify-content-between align-items-center rounded mt-1 border-0" 
-        variant={todo.completed ? 'secondary' : setColorFromPriority(todo.priorityCode)}
+        variant={todo.completed ? "secondary" : setColorFromPriority(todo.priorityCode)}
       >
-        <Form.Check className="d-none" type='checkbox'/>
+        <Form.Check className="d-none" type="checkbox"/>
         <div 
           className={todo.completed ? "text-decoration-line-through" : "text-decoration-none"}
         >
@@ -48,7 +47,7 @@ export default function TodoItem( {todo, toggle, remove} : TodoItemProps) {
           </Link>
           <Button 
             className="remove-todo" 
-            variant='none' 
+            variant="none" 
             onClick={(e) => removeHandler(e)}
           >
             <img src={trash} alt="" />

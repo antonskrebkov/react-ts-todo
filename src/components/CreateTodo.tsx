@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { ITodo } from '../interfaces/ITodo';
+import ITodo from '../interfaces/ITodo';
 
 interface CreateTodoProps {
   create: (newTodo: ITodo) => void
@@ -40,8 +40,7 @@ export default function CreateTodo({create}: CreateTodoProps) {
 
   return (
     <>
-      <Button variant='light' onClick={() => setShow(true)}>Create new task</Button>
-
+      <Button variant="light" onClick={() => setShow(true)}>Create new task</Button>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Create new task</Modal.Title>
@@ -70,7 +69,7 @@ export default function CreateTodo({create}: CreateTodoProps) {
               placeholder="Task title"
               value={todoTitle} 
               onChange={(e) => setTodoTitle(e.target.value)}
-              onKeyDown={(e) => e.code === 'Enter' ? addNewTodo() : ''}
+              onKeyDown={(e) => e.code === "Enter" ? addNewTodo() : ""}
             />
             {showError && <div className="text-danger mt-1 fs-6">Title is required and must be longer than 2 letters!</div>}
           </Form.Group>

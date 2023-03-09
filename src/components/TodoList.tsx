@@ -1,7 +1,7 @@
 import TodoItem from '../components/TodoItem';
 import { Badge, Accordion, ListGroup } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { ITodo } from '../interfaces/ITodo';
+import ITodo from '../interfaces/ITodo';
 import { sortTodos, toggleHandler, deleteHandler} from '../helpers';
 
 interface TodoListProps {
@@ -13,7 +13,7 @@ interface TodoListProps {
   children: string,
 }
 
-export default function TodoList({ eventKey, todoList, setTodos, deletedTodos, setDeletedTodos, children } : TodoListProps) {
+export default function TodoList({ eventKey, todoList, setTodos, deletedTodos, setDeletedTodos, children }: TodoListProps) {
 
   const sortedTodoList = sortTodos(todoList)
 
@@ -26,12 +26,12 @@ export default function TodoList({ eventKey, todoList, setTodos, deletedTodos, s
   }
 
   return (
-    <Accordion.Item className='mb-3 rounded' eventKey={eventKey}>
+    <Accordion.Item className="mb-3 rounded" eventKey={eventKey}>
       <Accordion.Header>
         <Badge bg="dark">{sortedTodoList.length}</Badge>
-        <div className='mx-2'>{children}</div>
+        <div className="mx-2">{children}</div>
       </Accordion.Header>
-      <Accordion.Body className='p-0'>
+      <Accordion.Body className="p-0">
       <ListGroup>
         {!sortedTodoList.length && <ListGroup.Item>No tasks</ListGroup.Item>}
         <TransitionGroup>

@@ -1,4 +1,4 @@
-export interface ITodo {
+export default interface ITodo {
   id: number,
   chapter: string,
   title: string,

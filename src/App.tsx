@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import DeletedTasks from './pages/DeletedTasks';
 import TodoPage from './pages/TodoPage';
 import Layout from './components/Layout/Layout';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { DeletedContext } from './context/DeletedListContext';
 import { AuthContext } from './context/AuthContext';
-import { ITodo } from "./interfaces/ITodo";
+import ITodo from "./interfaces/ITodo";
 import { ProductivityTodosContext } from './context/ProductivityTodosContext';
 import { AssignmentTodosContext } from './context/AssignmentTodosContext';
 import { WorkTodosContext } from './context/WorkTodosContext';
@@ -51,9 +51,9 @@ export default function App() {
               {isAuth ?
                 <Routes>
                   <Route path="/" element={<Layout />}>
-                    <Route path="todos" element={<MainPage />}></Route>
-                    <Route path="deleted" element={<DeletedTasks />}></Route>
-                    <Route path="todos/:id" element={<TodoPage />}></Route>
+                    <Route path="todos" element={<MainPage />} />
+                    <Route path="deleted" element={<DeletedTasks />} />
+                    <Route path="todos/:id" element={<TodoPage />} />
                   </Route>
                   <Route 
                     path="*" 
@@ -61,13 +61,13 @@ export default function App() {
                   </Route>
                 </Routes>
               :
-              <Routes>
-                  <Route path="/login" element={<LoginPage />}></Route>
-                  <Route 
-                    path="*"
-                    element={<Navigate to="/login" replace />}>
-                  </Route>
-              </Routes>
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route 
+                      path="*"
+                      element={<Navigate to="/login" replace />}>
+                    </Route>
+                </Routes>
               }
               </BrowserRouter>
             </DeletedContext.Provider>

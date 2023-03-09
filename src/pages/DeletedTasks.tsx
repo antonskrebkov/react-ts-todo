@@ -1,13 +1,14 @@
 import {useContext} from 'react'
 import { DeletedContext, DeletedListContextType } from '../context/DeletedListContext';
-import { Button, ListGroup } from 'react-bootstrap';
+import { Button, ListGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import trash from '../assets/images/trash.svg';
 import useLocalStorage from '../hooks/useLocalStorage';
-import { ITodo } from '../interfaces/ITodo';
+import ITodo from '../interfaces/ITodo';
 import { ProductivityTodosContext, ProductivityTodosContextType } from '../context/ProductivityTodosContext';
 import { AssignmentTodosContext, AssignmentTodosContextType } from '../context/AssignmentTodosContext';
 import { WorkTodosContext, WorkTodosContextType } from '../context/WorkTodosContext';
+import { formatDate } from '../helpers';
 
 export default function DeletedTasks() {
 
@@ -51,8 +52,8 @@ export default function DeletedTasks() {
 
   return (
     <div className="mt-4">
-      <Button variant='danger' onClick={cleanDeleted}>Clean all</Button>
-      <ListGroup className='mt-4'>
+      <Button variant="danger" onClick={cleanDeleted}>Clean all</Button>
+      <ListGroup className="mt-4">
           {!deletedTodos.length && <ListGroup.Item className="rounded">No tasks</ListGroup.Item>}
         <TransitionGroup>
           {deletedTodos.map(todo => {
@@ -62,25 +63,35 @@ export default function DeletedTasks() {
                 timeout={200}
                 classNames="todo"
               >
-                <ListGroup.Item key={todo.id} className="d-flex justify-content-between align-items-center rounded mb-2" variant='secondary'>
-                  <div className="todoTitle">{todo.chapter}: {todo.title}</div>
-                  <div className="d-flex justify-content-center align-items-center gap-1">
-                    <Button 
-                      className="open-todo text-decoration-none text-secondary d-flex px-1 justify-content-center align-items-center border border-1 rounded border-secondary"
-                      variant='none'
-                      onClick={() => restoreTodo(todo)}
-                    >
-                      Restore
-                    </Button>
+                <OverlayTrigger
+                  placement="bottom"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={
+                    <Tooltip id="button-tooltip">
+                      Added at: {formatDate(todo)}
+                    </Tooltip>
+                  }
+                >
+                  <ListGroup.Item key={todo.id} className="d-flex justify-content-between align-items-center rounded mb-2" variant="secondary">
+                    <div className="todoTitle">{todo.chapter}: {todo.title}</div>
+                    <div className="d-flex justify-content-center align-items-center gap-1">
                       <Button 
-                        className="remove-todo" 
-                        variant='none' 
-                        onClick={(e) => deleteTodo(todo.id, e)}
+                        className="open-todo text-decoration-none text-secondary d-flex px-1 justify-content-center align-items-center border border-1 rounded border-secondary"
+                        variant="none"
+                        onClick={() => restoreTodo(todo)}
                       >
-                        <img src={trash} alt="" />
+                        Restore
                       </Button>
-                  </div>
-                </ListGroup.Item>
+                        <Button 
+                          className="remove-todo" 
+                          variant="none" 
+                          onClick={(e) => deleteTodo(todo.id, e)}
+                        >
+                          <img src={trash} alt="" />
+                        </Button>
+                    </div>
+                  </ListGroup.Item>
+                </OverlayTrigger>
               </CSSTransition>
           )})}
         </TransitionGroup>
