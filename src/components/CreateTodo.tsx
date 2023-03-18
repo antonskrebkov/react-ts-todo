@@ -18,7 +18,7 @@ export default function CreateTodo({create}: CreateTodoProps) {
     const newTodo: ITodo = {
       id: Date.now(),
       chapter: chapter,
-      title: todoTitle,
+      title: todoTitle.trim(),
       completed: false,
       priorityCode: Number(priority),
       cachedPriorityCode: Number(priority)
